@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android Kotlin lec_3</string>
+    <string name="question_1">Canberra is the capital of Australia?</string>
+    <string name="question_2">Aden is the capital of Australia?</string>
+    <string name="question_3">Taez is the capital of Australia?</string>
+    <string name="question_4">Ibb is the capital of Australia?</string>
+    <string name="question_5">Hadramoot is the capital of Australia?</string>
+    <string name="true_button">true</string>
+    <string name="false_button">false</string>
+    <string name="correct_toast">correct</string>
+    <string name="incorrect_toast">in correct !</string>
+</resources>
