@@ -1,7 +1,6 @@
 package com.abdullahalamodi.androidkotlinlec_3
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -15,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var falseBtn: Button;
     private lateinit var nextBtn: ImageButton;
     private lateinit var previousBtn: ImageButton;
+
+    private var currentIndex: Int = 0;
     private val questionBank = listOf(
         Question(R.string.question_1, true),
         Question(R.string.question_2, false),
@@ -22,11 +23,12 @@ class MainActivity : AppCompatActivity() {
         Question(R.string.question_4, false),
         Question(R.string.question_5, false)
     )
-    private var currentIndex: Int = 0;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         questionView = findViewById(R.id.question_v);
         trueBtn = findViewById(R.id.true_btn);
         falseBtn = findViewById(R.id.false_btn);
@@ -80,28 +82,32 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         );
         toast.show();
+        Question.answeredQuestions++;
         // set question state to answered
         questionBank[currentIndex].isAnswered = true;
+        setAnswerBtnsState(false);
         //check if all questions is answered display grade
-        if (Question.checkAnsweredQuestions(questionBank.size))
+        if (Question.checkAnsweredQuestions(questionBank.size)) {
             Toast.makeText(
                 this,
                 "You git: ${Question.grade} from: ${questionBank.size}",
                 Toast.LENGTH_SHORT
             ).show();
+        }
+
 
     }
 
-    private fun setAnswerBtnsVisibility(visibility: Int) {
-        trueBtn.visibility = visibility;
-        falseBtn.visibility = visibility;
+    private fun setAnswerBtnsState(enabled: Boolean) {
+        trueBtn.isEnabled = enabled;
+        falseBtn.isEnabled = enabled;
     }
 
     private fun checkIfAnswering() {
         if (questionBank[currentIndex].isAnswered) {
-            setAnswerBtnsVisibility(View.INVISIBLE);
+            setAnswerBtnsState(false);
         } else {
-            setAnswerBtnsVisibility(View.VISIBLE);
+            setAnswerBtnsState(true);
         }
     }
 
